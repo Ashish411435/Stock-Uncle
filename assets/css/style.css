@@ -598,6 +598,7 @@ h1.display-1{
 .copyright {
     color: var(--light);
     background: var(--green);
+    font-weight: 600;
 }
 
 .copyright a {
