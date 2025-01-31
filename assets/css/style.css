@@ -50,6 +50,9 @@ h6,
 hr{
     background-color: #979191;
 }
+h1.display-1{
+    font-size: 4rem;
+}
 .py-13{
     padding-top: 13px;
     padding-bottom: 13px;
