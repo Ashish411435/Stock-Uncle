@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Set recipient email (change to your email)
-    $to = "ashish1616@yopmail.com";
+    $to = "ashishkamal1210@gmail.com";
     $headers = "From: $fullname <$email>\r\n";
     $headers .= "Reply-To: $email\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
