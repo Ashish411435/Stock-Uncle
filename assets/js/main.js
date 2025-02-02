@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner();
-    
-    
+
+
     // Initiate the wowjs
     new WOW().init();
 
@@ -32,8 +32,8 @@
             }
         }
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -43,7 +43,7 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
@@ -64,22 +64,22 @@
         center: true,
         dots: false,
         nav: true,
-        navText : [
+        navText: [
             '<i class="bi bi-chevron-left"></i>',
             '<i class="bi bi-chevron-right"></i>'
         ],
         responsive: {
-			0:{
-                items:1
+            0: {
+                items: 1
             },
-            576:{
-                items:1
+            576: {
+                items: 1
             },
-            768:{
-                items:2
+            768: {
+                items: 2
             },
-            992:{
-                items:3
+            992: {
+                items: 3
             }
         }
     });
@@ -93,23 +93,124 @@
         margin: 24,
         dots: true,
         loop: true,
-        nav : false,
+        nav: false,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-			576:{
-                items:1
+            576: {
+                items: 1
             },
-            768:{
-                items:2
+            768: {
+                items: 2
             },
-            992:{
-                items:3
+            992: {
+                items: 3
             }
         }
     });
 
-    
+    $("#contactForm").validate({
+        errorElement: "div",
+        rules: {
+            fullname: {
+                required: true,
+                maxlength: 45,
+                minlength: 3,
+            },
+            email: {
+                required: true,
+                maxlength: 50,
+                minlength: 5,
+            },
+            subject: {
+                required: true,
+                maxlength: 80,
+                minlength: 5,
+            },
+            message: {
+                required: true,
+                maxlength: 400,
+                minlength: 10,
+            },
+        }
+    });
+
+    // $("#contactForm").on("submit", function(e){
+    //     e.preventDefault();
+    //     if($(this).valid()){
+    //         let submitBtn = $("#submitBtn");
+    //         let formData = $(this).serialize();
+    //         console.log(formData);
+    //         // return;
+    //         $.ajax({
+    //             url: "./contact.php",
+    //             type: "POST",
+    //             data: formData,
+    //             beforeSend: function(){
+    //                 $(submitBtn).prop("disabled", true);
+    //                 $(submitBtn).append(`<span class="spinner-border text-light ms-2" role="status"></span>`);
+    //             },
+    //             success: function(response){
+    //                 $(submitBtn).prop("disabled", false);
+    //                 $(submitBtn).find(".spinner-border").remove();
+    //                 console.log("res", response);
+
+    //             },
+    //             error: function(){
+    //                 alert('Something went wrong...');
+    //             }
+    //         });
+    //     }
+    // });
+
+    $(document).ready(() => {
+        $("#contactForm").on("submit", function (e) {
+            e.preventDefault();
+            if (!$(this).valid()) return;
+
+            const submitBtn = $("#submitBtn");
+            const formData = $(this).serialize();
+
+            toggleButton(submitBtn, true);
+
+            $.post("./contact.php", formData)
+                .done((response) => {
+                    console.log("Response:", response);
+
+                    $("#contactForm")[0].reset(); // Reset form
+                    $(".submission-message")
+                        .text("Your message has been sent successfully!")
+                        .removeClass("text-danger")
+                        .addClass("text-success");
+                })
+                .fail((err) => {
+                    console.error("Error:", err);
+
+                    const errorMessage = err.responseText || "Something went wrong. Please try again.";
+                    $(".submission-message")
+                        .text(errorMessage)
+                        .removeClass("text-success")
+                        .addClass("text-danger");
+                })
+                .always(() => toggleButton(submitBtn, false));
+        });
+
+        function toggleButton(btn, disable) {
+            btn.prop("disabled", disable);
+            if (disable) {
+                btn.append(`<span class="spinner-border text-light ms-2" role="status"></span>`);
+            } else {
+                btn.find(".spinner-border").remove();
+            }
+
+            // Reset message before new submission
+            $(".submission-message").text("").removeClass("text-success text-danger");
+        }
+    });
+
+
+
+
 })(jQuery);
 
