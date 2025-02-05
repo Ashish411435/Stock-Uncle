@@ -7,10 +7,11 @@ require 'vendor/autoload.php'; // Load PHPMailer
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fullname = htmlspecialchars(trim($_POST["fullname"]));
     $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
+    $mobile = htmlspecialchars(trim($_POST["mobile"]));
     $subject = htmlspecialchars(trim($_POST["subject"]));
     $message = htmlspecialchars(trim($_POST["message"]));
 
-    if (!$fullname || !$email || !$subject || !$message) {
+    if (!$fullname || !$email || !$mobile || !$subject || !$message) {
         echo json_encode(["status" => "error", "message" => "Invalid input data."]);
         exit;
     }
@@ -33,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->Subject = htmlspecialchars($subject);
         $mail->Body = "<p><strong>Name:</strong> $fullname</p>
                        <p><strong>Email:</strong> $email</p>
+                       <p><strong>Mobile:</strong> $mobile</p>
                        <p><strong>Message:</strong><br>" . nl2br($message) . "</p>";
 
         if ($mail->send()) {

@@ -123,6 +123,12 @@
                 maxlength: 50,
                 minlength: 5,
             },
+            mobile: {
+                required: true,
+                minlength: 10,
+                maxlength: 10,
+                digits: true,
+            },
             subject: {
                 required: true,
                 maxlength: 80,
@@ -133,6 +139,14 @@
                 maxlength: 400,
                 minlength: 10,
             },
+        },
+        messages: {
+            mobile: {
+                required: "Mobile number is required",
+                minlength: "Mobile number must be exactly 10 digits",
+                maxlength: "Mobile number must be exactly 10 digits",
+                digits: "Only numbers are allowed"
+            }
         }
     });
 
@@ -177,21 +191,20 @@
             $.post("./contact.php", formData)
                 .done((response) => {
                     console.log("Response:", response);
-
-                    $("#contactForm")[0].reset(); // Reset form
-                    $(".submission-message")
-                        .text("Your message has been sent successfully!")
-                        .removeClass("text-danger")
-                        .addClass("text-success");
+                    $(".submission-message-wrapper")
+                    .text("Your message has been sent successfully!")
+                    .removeClass("error-bg fade")
+                    .addClass("success-bg");
+                    // $("#contactForm")[0].reset(); // Reset form
                 })
                 .fail((err) => {
                     console.error("Error:", err);
 
                     const errorMessage = err.responseText || "Something went wrong. Please try again.";
-                    $(".submission-message")
+                    $(".submission-message-wrapper")
                         .text(errorMessage)
-                        .removeClass("text-success")
-                        .addClass("text-danger");
+                        .removeClass("success-bg fade")
+                        .addClass("error-bg");
                 })
                 .always(() => toggleButton(submitBtn, false));
         });
@@ -205,7 +218,9 @@
             }
 
             // Reset message before new submission
-            $(".submission-message").text("").removeClass("text-success text-danger");
+            setTimeout(() => { 
+                $(".submission-message-wrapper").text("").removeClass("success-bg error-bg").addClass("fade");
+            }, 15000);
         }
     });
 

@@ -439,6 +439,9 @@ h1.display-1{
 .team-item img {
     position: relative;
     z-index: 2;
+    width: 408px;
+    height: 408px;
+    object-fit: contain;
 }
 
 .team-item .team-text {
@@ -684,6 +687,26 @@ h1.display-1{
     box-shadow: unset;
 }
 /*** End: FAQ Page CSS ***/
+
+/*** Start: tooltip CSS ***/
+.submission-message-wrapper {
+    position: absolute;
+    left: 8px;
+    top: -66px;
+    padding: 17px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    text-align: center;
+}
+.success-bg{
+    background-color: #6fc300b3;
+}
+.error-bg{
+    background-color: #ff000080;
+}
+/*** End: tooltip CSS ***/
 
 /*** Start: Terms And Conditions Page CSS ***/
 .terms-and-conditions .h4{
