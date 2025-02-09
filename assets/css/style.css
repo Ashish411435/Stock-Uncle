@@ -844,3 +844,8 @@ li{
         padding-right: 0 !important;
     }
 }
+@media (max-width: 320px){
+    .logo{
+        width: 170px !important;
+    }
+}
