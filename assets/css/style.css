@@ -53,9 +53,21 @@ hr{
 h1.display-1{
     font-size: 4rem;
 }
+.list-style-type-roman{
+    list-style-type: lower-roman;
+}
+.list-style-type-none{
+    list-style-type: none;
+}
+li{
+    color: var(--tertiary);
+}
 .py-13{
     padding-top: 13px;
     padding-bottom: 13px;
+}
+.fs-20{
+    font-size: 20px;
 }
 
 .text-green{
@@ -117,6 +129,9 @@ h1.display-1{
     height: 1rem;
     vertical-align: middle;
     border-width: .2em;
+}
+.accordion-button{
+    padding: 1.5rem 1.25rem;
 }
 /*** End: Bootstrap overwrite ***/
 
@@ -191,11 +206,15 @@ h1.display-1{
 /*** Navbar ***/
 .fixed-top {
     transition: .5s;
+    visibility: visible !important;
 }
 
 .top-bar {
     height: 45px;
     border-bottom: 1px solid rgba(53, 94, 252, .07);
+}
+.navbar{
+    visibility: visible !important;
 }
 
 .navbar .dropdown-toggle::after {
@@ -257,7 +276,7 @@ h1.display-1{
 .page-header {
     padding-top: 12rem;
     padding-bottom: 6rem;
-    background: url(../img/header.jpg) top left no-repeat;
+    background: url("../img/header.png") top left no-repeat;
     background-size: cover;
 }
 
@@ -433,7 +452,7 @@ h1.display-1{
 /*** Team ***/
 .team-item {
     position: relative;
-    padding: 4rem 0;
+    padding: 4rem 0 0;
 }
 
 .team-item img {
@@ -634,7 +653,22 @@ h1.display-1{
     color: var(--tertiary);
 }
 .courses-section .course-card{
+    transition: .3s;
     border-radius: 25px !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+.courses-section .course-card:hover{
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.courses-section .course-card:hover .card-img{
+    overflow: hidden;
+}
+.courses-section .course-card img{
+    transition: .3s;
+}
+.courses-section .course-card:hover img{
+    transform: scale(1.01);
 }
 
 /* Course Detail Page */
@@ -648,7 +682,7 @@ h1.display-1{
     font-weight: 500 !important;
 }
 .course-detail-leftcard .card-text, .blog-card .card-text, .blog-detail-card .card-text{
-    font-size: 17px;
+    font-size: 19px;
 }
 .course-detail-leftcard .card-img-top{
     height: 400px;
@@ -658,6 +692,9 @@ h1.display-1{
     position: absolute;
     top: 120px;
 }
+.related-courses-div.top-extra{
+    top: 150px;
+}
 /*** End: Course Pages CSS ***/
 
 /*** Start: Blog Pages CSS ***/
@@ -665,12 +702,15 @@ h1.display-1{
     height: 450px;
 }
 .blog-card .card-title{
-    font-size: 30px;
+    font-size: 34px;
     font-weight: 400 !important;
 }
 .blog-detail-card .card-title{
-    font-size: 32px;
+    font-size: 40px;
     font-weight: 500 !important;
+}
+.recent-blog-item:hover p{
+    color: var(--primary);
 }
 /*** End: Blog Pages CSS ***/
 
@@ -715,6 +755,16 @@ h1.display-1{
 }
 /*** End: Terms And Conditions Page CSS ***/
 
+/*** Start: Modal Css ***/
+.modal-header{
+    padding: 1.5rem 2rem;
+}
+.modal-body{
+    padding: 2rem;
+}
+
+/*** End: Modal Css ***/
+
 
 
 @media (min-width: 992px) {
@@ -738,6 +788,11 @@ h1.display-1{
         width: 280px;
     }
 }
+@media (max-width: 1200px) {
+    h1.display-1{
+        font-size: 3rem;
+    }
+}
 @media (max-width: 991.98px) {
     .navbar .navbar-nav {
         margin-top: 10px;
@@ -753,6 +808,9 @@ h1.display-1{
     }
     .rounded-20{
         border-radius: unset;
+    }
+    h1.display-1{
+        font-size: 2rem;
     }
 }
 @media (max-width: 768px) {
@@ -770,12 +828,19 @@ h1.display-1{
 }
 @media (max-width: 576px){
     .logo{
-        width: 240px !important;
+        width: 190px !important;
     }
-    h1.display-1{
-        font-size: 38px !important;
+    h1.display-1, h1.card-title{
+        font-size: 30px !important;
+    }
+    p.h3{
+        font-size: 22px !important;
     }
     .blog-card .card-img-top, .blog-detail-card .card-img-top {
-        height: 300px;
+        height: 210px;
+    }
+    .container-xxl.py-5.mw-100{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 }

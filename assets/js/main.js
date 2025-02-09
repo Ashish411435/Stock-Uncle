@@ -17,21 +17,34 @@
 
 
     // Fixed Navbar
-    $(window).scroll(function () {
-        if ($(window).width() < 992) {
-            if ($(this).scrollTop() > 45) {
-                $('.fixed-top').addClass('bg-white shadow');
+    $(document).ready(function () {
+        function applyScrollEffect() {
+            if ($(window).width() < 992) {
+                if ($(window).scrollTop() > 45) {
+                    $('.fixed-top').addClass('bg-white shadow');
+                } else {
+                    $('.fixed-top').removeClass('bg-white shadow');
+                }
             } else {
-                $('.fixed-top').removeClass('bg-white shadow');
-            }
-        } else {
-            if ($(this).scrollTop() > 45) {
-                $('.fixed-top').addClass('bg-white shadow').css('top', -45);
-            } else {
-                $('.fixed-top').removeClass('bg-white shadow').css('top', 0);
+                if ($(window).scrollTop() > 45) {
+                    $('.fixed-top').addClass('bg-white shadow').css('top', -45);
+                } else {
+                    $('.fixed-top').removeClass('bg-white shadow').css('top', 0);
+                }
             }
         }
+    
+        // Run the function immediately when the page loads
+        setTimeout(() => { 
+            applyScrollEffect();
+        }, 300);
+    
+        // Also run the function on scroll
+        $(window).scroll(function () {
+            applyScrollEffect();
+        });
     });
+    
 
 
     // Back to top button
@@ -43,7 +56,7 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 500, 'easeInOutExpo');
         return false;
     });
 
@@ -132,7 +145,6 @@
             subject: {
                 required: true,
                 maxlength: 80,
-                minlength: 5,
             },
             message: {
                 required: true,
@@ -179,18 +191,18 @@
     // });
 
     $(document).ready(() => {
-        $("#contactForm").on("submit", function (e) {
+        $(document).on("submit", "#contactForm", function (e) {
             e.preventDefault();
             if (!$(this).valid()) return;
-
             const submitBtn = $("#submitBtn");
+            const submissionPath = $(this).is("[data-book-trial]") ? "../contact.php" : "./contact.php";
             const formData = $(this).serialize();
-
             toggleButton(submitBtn, true);
 
-            $.post("./contact.php", formData)
+            $.post(submissionPath, formData)
                 .done((response) => {
                     console.log("Response:", response);
+                    $("#contactForm")[0].reset();
                     $(".submission-message-wrapper")
                     .text("Your message has been sent successfully!")
                     .removeClass("error-bg fade")
