@@ -154,6 +154,8 @@ li{
 .btn {
     transition: .5s;
     font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 17px;
 }
 
 .btn-primary,
@@ -627,6 +629,7 @@ li{
     color: var(--light);
     background: var(--green);
     font-weight: 600;
+    letter-spacing: .8px;
 }
 
 .copyright a {
@@ -765,8 +768,11 @@ li{
 
 /*** End: Modal Css ***/
 
-
-
+@media (min-width: 1200px){
+    .container{
+        max-width: 1280px;
+    }
+}
 @media (min-width: 992px) {
     .navbar .nav-item .dropdown-menu {
         display: block;
@@ -824,6 +830,9 @@ li{
         width: 100%;
         height: 100%;
         object-fit: fill;
+    }
+    h1.display-1{
+        width: 50%;
     }
 }
 @media (max-width: 576px){
